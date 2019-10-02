@@ -3,6 +3,17 @@
 const User = require('../models/User')
 
 class SessionController {
+  async show(req, res) {
+    const { email } = req.body
+
+    const user = await User.findOne({ email })
+    if (user) {
+      return res.status(200).json(user)
+    } else {
+      return res.sendStatus(204)
+    }
+  }
+
   async store(req, res) {
     const { email } = req.body
 

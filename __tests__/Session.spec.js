@@ -43,4 +43,25 @@ describe('Session Controller', () => {
 
     expect(response1.status).toBe(400)
   })
+
+  it(`should display user in the database`, async () => {
+    const userEmail = 'test@test.com'
+
+    const response0 = await request(app)
+      .post('/sessions')
+      .send({
+        email: userEmail,
+      })
+
+    expect(response0.status).toBe(201)
+    expect(response0.body.email).toBe(userEmail)
+
+    const response1 = await request(app).get('/sessions')
+
+    expect(response1.status).toBe(200)
+    console.dir(response1.info)
+    console.dir(response1.body)
+    console.dir(response1.text)
+    expect(response1.email).toBe(userEmail)
+  })
 })
