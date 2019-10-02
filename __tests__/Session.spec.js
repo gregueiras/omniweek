@@ -12,12 +12,17 @@ describe('Session Controller', () => {
   })
 
   it('should add a user to the database', async () => {
+    const userEmail = 'test@test.com'
+
     const response = await request(app)
       .post('/sessions')
       .send({
-        email: 'test@test.com',
+        email: userEmail,
       })
 
+    const user = await User.findOne({}, {}, { sort: { created_at: -1 } })
+
+    expect(user.email).toBe(userEmail)
     expect(response.status).toBe(201)
   })
 
