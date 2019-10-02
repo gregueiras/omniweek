@@ -1,5 +1,5 @@
-import request from 'supertest'
-import app from '../src/app'
+const request = require('supertest')
+const app = require('../src/app')
 
 describe('Session Controller', () => {
   it('should add a user to the database', async () => {
