@@ -22,7 +22,7 @@
     "jest": "^24.9.0",
     "nodemon": "^1.19.3",
     "prettier": "^1.18.2",
-    "supertest": "^4.0.2",
+    "supertest": "^3.4.2",
     "sync-dotenv": "^2.2.1"
   }
 }

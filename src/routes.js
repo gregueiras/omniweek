@@ -3,7 +3,8 @@ const SessionController = require('./controllers/SessionController')
 
 const routes = express.Router()
 
-console.log(SessionController)
-routes.get('/', SessionController.store)
+routes.post('/sessions', SessionController.store)
+
+routes.get('/', (req, res) => res.json({ msg: 'hello World' }))
 
 module.exports = routes

@@ -3,6 +3,15 @@ require('dotenv').config({
 })
 
 const express = require('express')
+const mongoose = require('mongoose')
+
+mongoose.connect(
+  `mongodb+srv://omniweek:${process.env.MONGO_PASS}@omnistack-15q4n.mongodb.net/${process.env.COLLECTION}?retryWrites=true&w=majority`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  },
+)
 
 class AppController {
   constructor() {
