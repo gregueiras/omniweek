@@ -11,6 +11,7 @@ const routes = express.Router()
 routes.get('/sessions', SessionController.show)
 routes.post('/sessions', SessionController.store)
 
+routes.get('/spots', SpotController.show)
 routes.post('/spots', upload.single('thumbnail'), SpotController.store)
 
 routes.get('/', (req, res) => res.json({ msg: 'hello World' }))
