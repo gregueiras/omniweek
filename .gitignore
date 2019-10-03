@@ -5,7 +5,3 @@ node_modules
 .env.test
 
 *.log
-
-__tests__/coverage
-
-uploads/*/*
