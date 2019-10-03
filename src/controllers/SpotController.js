@@ -27,4 +27,18 @@ module.exports = {
       return res.status(400).json({ code: 400, msg: error.message })
     }
   },
+
+  async show(req, res) {
+    const { body } = req
+
+    const { company } = body
+
+    try {
+      const spot = await Spot.findOne({ company }).orFail(new Error('No Spot with provided company'))
+
+      return res.status(200).json(spot)
+    } catch (error) {
+      return res.status(400).json({ code: 400, msg: error.message })
+    }
+  },
 }

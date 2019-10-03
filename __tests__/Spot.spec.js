@@ -75,4 +75,34 @@ describe('Spot Controller', () => {
     expect(spot.company).toBe(expectedSpot.company)
     expect(response.status).toBe(201)
   })
+
+  it('should be able to find spot by company name', async () => {
+    const expectedSpot = {
+      company: 'Farfetch',
+      price: 40,
+      thumbnail: null,
+      techs: 'ReactJS,React Native,Kotlin',
+    }
+
+    const user = await request(app)
+      .post('/sessions')
+      .send({
+        email: 'user@test.com',
+      })
+
+    await request(app)
+      .post('/spots')
+      .attach('thumbnail', `${__dirname}/testFiles/polo_zero.jpg`)
+      .set('user_id', user.body._id)
+      .field('company', expectedSpot.company)
+      .field('price', expectedSpot.price)
+      .field('techs', expectedSpot.techs)
+
+    const response = await request(app)
+      .get('/spots')
+      .send({ company: expectedSpot.company })
+
+    expect(response.status).toBe(200)
+    expect(response.body.company).toBe(expectedSpot.company)
+  })
 })
