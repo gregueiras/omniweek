@@ -1,10 +1,17 @@
 const express = require('express')
-const SessionController = require('./controllers/SessionController')
+const multer = require('multer')
 
+const uploadConfig = require('./config/upload')
+const SessionController = require('./controllers/SessionController')
+const SpotController = require('./controllers/SpotController')
+
+const upload = multer(uploadConfig)
 const routes = express.Router()
 
 routes.get('/sessions', SessionController.show)
 routes.post('/sessions', SessionController.store)
+
+routes.post('/spots', upload.single('thumbnail'), SpotController.store)
 
 routes.get('/', (req, res) => res.json({ msg: 'hello World' }))
 

@@ -56,12 +56,12 @@ describe('Session Controller', () => {
     expect(response0.status).toBe(201)
     expect(response0.body.email).toBe(userEmail)
 
-    const response1 = await request(app).get('/sessions')
+    const response1 = await request(app)
+      .get('/sessions')
+      .send({ email: userEmail })
 
     expect(response1.status).toBe(200)
-    console.dir(response1.info)
-    console.dir(response1.body)
-    console.dir(response1.text)
-    expect(response1.email).toBe(userEmail)
+    expect(response1.body.email).toBe(userEmail)
+    expect(response1.body._id).toBe(response0.body._id)
   })
 })
